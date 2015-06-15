@@ -1,0 +1,3 @@
+/home/cloudera/workspace/camus/camus-schema-registry/src/main/java/com/linkedin/camus/schemaregistry/MemorySchemaRegistry.java
+/home/cloudera/workspace/camus/camus-schema-registry/src/main/java/com/linkedin/camus/schemaregistry/FileSchemaRegistry.java
+/home/cloudera/workspace/camus/camus-schema-registry/src/main/java/com/linkedin/camus/schemaregistry/Serde.java
