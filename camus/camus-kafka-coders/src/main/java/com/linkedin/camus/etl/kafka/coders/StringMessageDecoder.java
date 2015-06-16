@@ -5,7 +5,7 @@ import com.linkedin.camus.coders.Message;
 import com.linkedin.camus.coders.MessageDecoder;
 import org.apache.log4j.Logger;
 import java.util.Properties;
-import java.io.UnsupportedEncodingException;
+
 
 
 /**
@@ -28,15 +28,8 @@ public class StringMessageDecoder extends MessageDecoder<Message, String> {
   @Override
   public CamusWrapper<String> decode(Message message) {
     long timestamp = 0;
-    String payloadString;
-
-    //payloadString = new String(payload);
-     try {
-      payloadString = new String(message.getPayload(), "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      log.error("Unable to load UTF-8 encoding, falling back to system default", e);
-      payloadString = new String(message.getPayload());
-    }
+    String payloadString = new String(message.getPayload());
+   
     timestamp = System.currentTimeMillis();
 
     return new CamusWrapper<String>(payloadString, timestamp);
