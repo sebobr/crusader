@@ -5,6 +5,7 @@ import com.linkedin.camus.coders.Message;
 import com.linkedin.camus.coders.MessageDecoder;
 import org.apache.log4j.Logger;
 import java.util.Properties;
+import java.io.UnsupportedEncodingException;
 
 
 /**
