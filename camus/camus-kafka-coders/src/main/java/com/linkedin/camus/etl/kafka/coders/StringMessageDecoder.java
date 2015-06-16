@@ -1,6 +1,7 @@
 package com.linkedin.camus.etl.kafka.coders;
 
 import com.linkedin.camus.coders.CamusWrapper;
+import com.linkedin.camus.coders.Message;
 import com.linkedin.camus.coders.MessageDecoder;
 import org.apache.log4j.Logger;
 import java.util.Properties;
@@ -14,7 +15,7 @@ import java.util.Properties;
 
  * This MessageDecoder returns a CamusWrapper that works with Strings payloads,
  */
-public class StringMessageDecoder extends MessageDecoder<byte[], String> {
+public class StringMessageDecoder extends MessageDecoder<Message, String> {
   private static final Logger log = Logger.getLogger(StringMessageDecoder.class);
 
   @Override
@@ -24,11 +25,17 @@ public class StringMessageDecoder extends MessageDecoder<byte[], String> {
   }
 
   @Override
-  public CamusWrapper<String> decode(byte[] payload) {
+  public CamusWrapper<String> decode(Message message) {
     long timestamp = 0;
     String payloadString;
 
-    payloadString = new String(payload);
+    //payloadString = new String(payload);
+     try {
+      payloadString = new String(message.getPayload(), "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      log.error("Unable to load UTF-8 encoding, falling back to system default", e);
+      payloadString = new String(message.getPayload());
+    }
     timestamp = System.currentTimeMillis();
 
     return new CamusWrapper<String>(payloadString, timestamp);
